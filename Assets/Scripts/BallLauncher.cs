@@ -5,12 +5,15 @@ using UnityEngine;
 public class BallLauncher : MonoBehaviour
 {
     Rigidbody rb;
-    float initialForce = .5f;
+    float initialForce = 1.5f;
+    float torqueZ;
+    float torqueY;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.maxAngularVelocity = 1000;
     }
 
     // Update is called once per frame
@@ -18,13 +21,18 @@ public class BallLauncher : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.Space))
         {
-            initialForce = Mathf.Clamp(initialForce * 1.15f, 0, 12000);
+            initialForce = Mathf.Clamp(initialForce * 1.02f, 0, 12000);
             Debug.Log(initialForce);
+            torqueY = Random.Range(-25f, 25f);
+            torqueZ = Random.Range(-12f, 12f);
         }
 
         if(Input.GetKeyUp(KeyCode.Space))
         {
+            Debug.Log("z: " + torqueZ);
+            Debug.Log("y: " + torqueY);
             rb.AddForce(Vector3.forward * initialForce * Time.deltaTime, ForceMode.Impulse);
+            rb.AddTorque(new Vector3(initialForce * 0, torqueY, torqueZ), ForceMode.Impulse);
         }
     }
 }
