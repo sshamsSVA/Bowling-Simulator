@@ -33,7 +33,7 @@ public class CarController : MonoBehaviour
         }
 
         Debug.Log("Moving: " + newForce);
-        carRb.AddForce(Vector3.forward * verticalInput * newForce);
+        transform.Translate(Vector3.forward * verticalInput * newForce);
         transform.Rotate(Vector3.up * horizontalInput * rotationSpeed * Time.deltaTime);
         
         

@@ -27,12 +27,24 @@ public class BallLauncher : MonoBehaviour
             torqueZ = Random.Range(-1f, 1f);
         }
 
-        if(Input.GetKeyUp(KeyCode.Space))
+        
+    }
+
+    private void FixedUpdate()
+    {
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             Debug.Log("z: " + torqueZ);
             Debug.Log("y: " + torqueY);
-            rb.AddForce(Vector3.forward * initialForce * Time.deltaTime, ForceMode.Impulse);
-            rb.AddTorque(new Vector3(10 * 0, 0, torqueZ), ForceMode.Impulse);
+            PushBall();
         }
+
     }
+
+    void PushBall()
+    {
+        rb.AddForce(Vector3.forward * initialForce, ForceMode.Impulse);
+        rb.AddTorque(new Vector3(10 * 0, 0, torqueZ), ForceMode.Impulse);
+    }
+
 }
