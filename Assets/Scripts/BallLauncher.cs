@@ -22,9 +22,9 @@ public class BallLauncher : MonoBehaviour
         if(Input.GetKey(KeyCode.Space))
         {
             initialForce = Mathf.Clamp(initialForce * 1.02f, 0, 12000);
-            Debug.Log(initialForce);
-            torqueY = Random.Range(-25f, 25f);
-            torqueZ = Random.Range(-12f, 12f);
+           // Debug.Log(initialForce);
+            //torqueY = Random.Range(-25f, 25f);
+            torqueZ = Random.Range(-1f, 1f);
         }
 
         if(Input.GetKeyUp(KeyCode.Space))
@@ -32,7 +32,7 @@ public class BallLauncher : MonoBehaviour
             Debug.Log("z: " + torqueZ);
             Debug.Log("y: " + torqueY);
             rb.AddForce(Vector3.forward * initialForce * Time.deltaTime, ForceMode.Impulse);
-            rb.AddTorque(new Vector3(initialForce * 0, torqueY, torqueZ), ForceMode.Impulse);
+            rb.AddTorque(new Vector3(10 * 0, 0, torqueZ), ForceMode.Impulse);
         }
     }
 }
